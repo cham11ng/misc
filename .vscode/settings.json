@@ -1,6 +1,11 @@
 {
+  "pylint.args": [
+    "--max-line-length=120"
+  ],
+  "black-formatter.args": [
+    "--line-length=120"
+  ],
   "[python]": {
-    "editor.defaultFormatter": "ms-python.autopep8"
-  },
-  "python.formatting.provider": "autopep8"
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
 }
