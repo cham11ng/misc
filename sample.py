@@ -5,9 +5,9 @@ import os
 os.system("clear")
 
 
-def ask_inputs():
-    """."""
+def _():
+    """_"""
 
 
 if __name__ == "__main__":
-    ask_inputs()  # Calls ask_input function.
+    _()  # Calls _ function.
