@@ -35,7 +35,7 @@ def input_positive_float(prompt_message):
 def diet_calculator():
     """Diet calculator"""
     starting_calories = input_positive_float("Enter starting daily calorie intake: ")
-    percentage_decrease = input_positive_float("Enter average daily percentage decrease (e.g., 0.5 for 0.5%): ")
+    percentage_decrease = input_positive_float("Enter average daily percentage (%) decrease: ")
     num_days = int(input_positive_float("Enter the number of days: "))
 
     current_calories = starting_calories                                   # Setting starting_calories to current_calories
