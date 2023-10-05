@@ -7,7 +7,7 @@ os.system("clear")
 MENU = """
 Select from given menu:
     1) Add an item
-    2) Delete item
+    2) Delete an item
     3) Search an item
     4) Update an item
     5) Display item in table
@@ -27,7 +27,7 @@ def take_input():
         if price.isdigit():
             price = int(price)
 
-            return name.upper(), code, price
+            return (name.upper(), code, price)
 
         print("Please enter a valid price.")
 
@@ -48,6 +48,7 @@ def run_shopping_cart():
     """Run shopping cart program"""
     i = 1
     cart = {}
+    MAX = 4
 
     while True:
         os.system("clear")
@@ -58,13 +59,17 @@ def run_shopping_cart():
         print()
 
         if choice == "1":
-            name, code, price = take_input()
+            if len(cart) == MAX:
+                print(f"Application supports maximum {MAX} items.")
+                display_table(cart)
+            else:
+                (name, code, price) = take_input()
 
-            item = {"name": name, "code": code, "price": price}
-            cart[i] = item
-            i += 1
+                item = {"name": name, "code": code, "price": price}
+                cart[i] = item
+                i += 1
 
-            display_table({name: item})
+                display_table({name: item})
 
         elif choice == "2":
             name = input("Enter item name to remove: ")
@@ -103,7 +108,7 @@ def run_shopping_cart():
                     found = True
                     display_table({key: value})
                     print()
-                    name, code, price = take_input()
+                    (name, code, price) = take_input()
 
                     item = {"name": name, "code": code, "price": price}
                     cart[key] = item
