@@ -1,12 +1,13 @@
-"""Module: Day 9 Classwork: Python - Sagar Chamling Rai
+"""Module: Day 11 Classwork: Python - Sagar Chamling Rai
 
 Build a phone directory with python code.
 
-There will be 4 options
+There will be 5 options
 1. Add Phone Number
 2. Delete Phone Number
 3. Search Phone Number
 4. Update Phone Number
+5: Display Phone Book
 5. Quit
 
 If user input more than 5 phone numbers then it will stop the program and display all the phone numbers.
@@ -17,7 +18,7 @@ This has to be done by dictionary.
 
 import os
 
-MAX_PHONE_NUMBER = 5
+MAX_PHONE_NUMBER = 5 # Maximum phone number limit.
 MENU = """
 Welcome to Phone Book Portal:
 
@@ -29,12 +30,12 @@ Welcome to Phone Book Portal:
     6. Quit
 
 Total PhoneBook Contacts: {total}
-"""
+""" # Menu with total phone_book length as placeholder.
 
-i = 1  # Define global variable for indexing dictionary.
-phone_book = {}  # Empty dictionary variable for phone_book.
+i = 1 # Global variable index
+phone_book = {}  # Empty dictionary to store phone book items.
 
-
+# Messages
 msg_input_search = "Enter your name or phone number to search: "
 msg_input_option = "Enter your choice: "
 msg_input_name = "Enter name: "
@@ -53,13 +54,15 @@ msg_err_maximum_limit = "You've already reached the maximum limit."
 
 
 def take_input():
-    """Take input to phone number."""
+    """Take input from user and return name and phone number."""
     name = input(msg_input_name)
 
     while True:
         phone_number = input(msg_input_phone)
 
-        if phone_number.isdigit() and len(phone_number) == 10 and phone_number[0] != "0":
+        if (
+            phone_number.isdigit() and len(phone_number) == 10 and phone_number[0] != "0"
+        ):  # Check if the phone_number is digit and length is 10 and not start with 0.
             return (name, phone_number)
         else:
             print(msg_err_invalid_number)
@@ -67,9 +70,11 @@ def take_input():
 
 def add_phone_number():
     """Add phone number. Check the number (shall not start with 0 and length should be 10)."""
-    global i
+    global i  # Since 'i' is defined outside of this function. I defined it as global variable.
 
-    if len(phone_book) == MAX_PHONE_NUMBER:
+    if (
+        len(phone_book) >= MAX_PHONE_NUMBER
+    ):  # Check if the phone_book length is greater than or equal to MAX_PHONE_NUMBER.
         print(msg_err_maximum_limit)
 
         return
@@ -83,7 +88,7 @@ def add_phone_number():
 
 
 def delete_phone_number():
-    """Add delete phone number."""
+    """Delete phone book. Search by phone number or name."""
     found = False
     search_input = input(msg_input_search)
 
@@ -91,7 +96,7 @@ def delete_phone_number():
         if search_input.lower() == value["name"].lower() or search_input == value["phone_number"]:
             found = True
 
-            del phone_book[key]
+            del phone_book[key]  # Delete the item from dictionary.
             print(msg_success_delete)
 
             break
@@ -101,7 +106,7 @@ def delete_phone_number():
 
 
 def search_phone_number():
-    """Add search phone number."""
+    """Search phone book. Search by phone number or name."""
     found = False
     search_input = input(msg_input_search)
 
@@ -109,7 +114,7 @@ def search_phone_number():
         if search_input.lower() == value["name"].lower() or search_input == value["phone_number"]:
             found = True
 
-            print("Name:", value["name"])
+            print("Name:", value["name"])  # Print the name and phone number.
             print("Phone number:", value["phone_number"])
 
             break
@@ -119,7 +124,7 @@ def search_phone_number():
 
 
 def update_phone_number():
-    """Update phone number detail, search by phone number or name."""
+    """Update phone book. Search by phone number or name."""
     search_input = input(msg_input_search)
     found = False
 
@@ -129,7 +134,7 @@ def update_phone_number():
 
             (name, phone_number) = take_input()
 
-            phone_book[key] = {"name": name, "phone_number": phone_number}
+            phone_book[key] = {"name": name, "phone_number": phone_number}  # Update the item in dictionary.
 
             break
 
@@ -138,8 +143,7 @@ def update_phone_number():
 
 
 def display_phone_book():
-    """Display items in a cart in table format."""
-
+    """Display phone book in tabular format."""
     print()  # Extra line
     print(f"{'Name':<15} {'Phone Number':<15}")  # Header of table
     print(f"{'-'*15:<15} {'-'*15:<15}")  # Boarder of table
@@ -160,17 +164,17 @@ def run_phone_book():
 
         print()  # Extra line in output.
 
-        if user_input == "1":
+        if user_input == "1":  # Check if the user input is 1 to perform add_phone_number function.
             add_phone_number()
-        elif user_input == "2":
+        elif user_input == "2":  # Check if the user input is 2 to perform delete_phone_number function.
             delete_phone_number()
-        elif user_input == "3":
+        elif user_input == "3":  # Check if the user input is 3 to perform search_phone_number function.
             search_phone_number()
-        elif user_input == "4":
+        elif user_input == "4":  # Check if the user input is 4 to perform update_phone_number function.
             update_phone_number()
-        elif user_input == "5":
+        elif user_input == "5": # Check if the user input is 5 to perform display_phone_book function.
             display_phone_book()
-        elif user_input == "6":
+        elif user_input == "6": # Check if the user input is 6 to quit the program.
             print(msg_success_quit)
 
             break
@@ -183,4 +187,4 @@ def run_phone_book():
 
 
 if __name__ == "__main__":
-    run_phone_book()  # Calls run_phone_book function.
+    run_phone_book()  # Calls the main "run_phone_book" function.
