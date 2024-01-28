@@ -1,4 +1,4 @@
-"""Module: Day X Classwork: Python - Sagar Chamling Rai"""
+"""Module: Python - Sagar Chamling Rai"""
 
 import os
 
