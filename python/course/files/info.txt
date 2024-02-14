@@ -1,0 +1,3 @@
+hello info.txt file reader
+next line
+new line added using write function
