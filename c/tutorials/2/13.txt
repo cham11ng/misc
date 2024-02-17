@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<conio.h>
+int main()
+{
+long int i,sum=0,a,b;
+for(i=1;1<=999;i++)
+{
+	b=i;
+	
+	while(b!=0)
+	{	
+		
+		a=b%10;
+		sum=sum+a*a*a;
+		b=b/10;
+	}
+	
+	if(i==sum)
+	{
+		printf("%ld ",i);
+	}
+
+}
+getch();
+return 0;
+}
