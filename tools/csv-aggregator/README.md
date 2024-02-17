@@ -1,4 +1,4 @@
-# CSV-Aggregator
+# csv-aggregator
 
 Compare two CSV files and perform difference merge into new file.
 

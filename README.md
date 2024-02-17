@@ -1,17 +1,18 @@
 # misc
 
-This `misc` repository contains miscellaneous programming codes learnt from courses, assignments, practices, etc.
+This `misc` repository contains miscellaneous coding tools and resources learnt from courses, assignments, practices, labs, etc.
 
 ## Table of Contents
 
-- [Python](python)
-  - [Tools](python/tools)
-  - [Data Science Tools](python/data-science-tools)
-  - [Data Engineering](python/data-engineering)
+- [tools](tools)
+
+- [python](python)
+  - [course/data-science-tools](python/course/data-science-tools)
+  - [course/data-engineering](python/course/data-engineering)
 
 ## Getting Started
 
-### Python
+### python
 
 ```bash
 pip install -r requirements.txt
@@ -19,4 +20,4 @@ pip install -r requirements.txt
 
 ## Happy Coding
 
-@cham11ng
+> @cham11ng

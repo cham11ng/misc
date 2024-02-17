@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+
+import os
+import json
+import logging
+import argparse
+import datetime
+import requests
+
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - [ %(levelname)s ] %(name)s - %(message)s")
+logger = logging.getLogger("timesheet")
+
+payload = []
+WORKING_HOUR = 8
+TASK_ID = 1  # Coding
+PROJECT_ID = 1  # Project1
+TIMESHEET_BASE_APP_URL = os.environ.get("TIMESHEET_BASE_APP_URL")
+
+
+def parse_cli_args():
+    """Parse CLI arguments."""
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--token",
+        type=str,
+        required=True,
+        help=("Access token."),
+    )
+
+    parser.add_argument(
+        "--days",
+        type=int,
+        required=True,
+        help=("Total no. of days."),
+    )
+
+    parser.add_argument(
+        "--dry",
+        help=("DRY Run."),
+        action="store_true",
+    )
+
+    return parser.parse_args()
+
+
+def main():
+    args = parse_cli_args()
+
+    res = requests.get(
+        f"https://leave.{TIMESHEET_BASE_APP_URL}/api/leave/wfh-history",
+        headers={"authorization": "Bearer {}".format(args.token)},
+        timeout=10,
+    )
+
+    for value in res.json().get("data"):
+        wfhDate = datetime.datetime.strptime(value.get("wfhDate")[0:10], "%Y-%m-%d")
+        today = datetime.datetime.now()
+        report = value.get("wfhReport").strip() if value.get("wfhReport") else ""
+
+        diff = abs(today - wfhDate).days
+
+        if diff < args.days:
+            print("\n------------------------------------------------")
+            print("WFH Date: {}".format(value.get("wfhDate")[0:10]))
+            print("WFH Report: \n{}".format(report))
+
+            payload.append(
+                {
+                    "date": str(wfhDate)[0:10],
+                    "duration": WORKING_HOUR * 60,
+                    "note": report,
+                    "projectId": PROJECT_ID,
+                    "status": "saved",
+                    "taskId": TASK_ID,
+                }
+            )
+
+    if not args.dry:
+        logger.info("\n\nSubmitting timesheet with Payload.")
+        logger.debug(f"Payload: {json.dumps(payload[1:], indent=4)}")
+        output = requests.post(
+            f"https://{TIMESHEET_BASE_APP_URL}/api/timesheet/",
+            json=payload,
+            timeout=10,
+            headers={"authorization": "Bearer {}".format(args.token)},
+        )
+
+        logger.info(f"Output: {output.json().get('data')}")
+
+        return
+
+    logger.info("Timesheet not submitted")
+
+
+main()
