@@ -1,4 +1,4 @@
-# top-banks
+# top-banks-project
 
 In this project, you will put all the skills acquired throughout the course and your knowledge of basic Python to test. You will work on real-world data and perform the operations of Extraction, Transformation, and Loading (ETL) as required.
 
