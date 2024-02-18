@@ -143,7 +143,7 @@ if __name__ == "__main__":
 
     query_statement = f"SELECT * from {TABLE_NAME} WHERE GDP_USD_billions >= 100"
     run_query(query_statement, sql_connection)
-
-    log_progress("Process Complete.")
+    log_progress("Run query complete. Closing SQL connection.")
 
     sql_connection.close()
+    log_progress('Process Complete. Connection Closed.')
