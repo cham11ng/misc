@@ -4,11 +4,15 @@ This `misc` repository contains miscellaneous coding tools and resources learnt 
 
 ## Table of Contents
 
-- [tools](tools)
+- [tools](tools) - list of tools made to ease my daily tasks.
 
-- [python](python)
-  - [course/data-science-tools](python/course/data-science-tools)
-  - [course/data-engineering](python/course/data-engineering)
+  - [csv-aggregator](tools/csv-aggregator) - CLI to perform merge (join operation) on two csv files.
+  - [wfh-to-timesheet](tools/wfh-to-timesheet) - CLI to transfer wfh report to timesheet.
+  - [datagrip-to-markdown](tools/datagrip-to-markdown) - Datagrip plugin to export database table as markdown with additional column.
+
+- [python](python) - hands on projects
+  - [bank-etl](python/course/data-engineering/bank/) - ETL process of World top Banks.
+  - [gdp-etl](python/course/data-engineering/gdp/) - ETL process of World top Countries by GDP.
 
 ## Getting Started
 
