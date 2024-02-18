@@ -1,10 +1,10 @@
-2024-Feb-17-21:28:57 : Preliminaries complete. Initiating ETL process.
-2024-Feb-17-21:28:58 : Data Extraction complete. Initiating transformation process.
-2024-Feb-17-21:28:58 : Data Transformation complete. Initiating loading process.
-2024-Feb-17-21:28:58 : Data load to CSV file complete. Initiating SQL connection.
-2024-Feb-17-21:28:58 : SQL Connection Initiated. Initiating loading process.
-2024-Feb-17-21:28:58 : Data load to database complete. Running the query
-2024-Feb-17-21:28:58 : Run query 1 complete. Closing SQL connection.
-2024-Feb-17-21:28:58 : Run query 2 complete. Closing SQL connection.
-2024-Feb-17-21:28:58 : Run query 3 complete. Closing SQL connection.
-2024-Feb-17-21:28:58 : Process Complete. Connection Closed.
+2024-Feb-17-21:33:02 : Preliminaries complete. Initiating ETL process.
+2024-Feb-17-21:33:04 : Data Extraction complete. Initiating transformation process.
+2024-Feb-17-21:33:04 : Data Transformation complete. Initiating loading process.
+2024-Feb-17-21:33:04 : Data load to CSV file complete. Initiating SQL connection.
+2024-Feb-17-21:33:04 : SQL Connection Initiated. Initiating loading process.
+2024-Feb-17-21:33:04 : Data load to database complete. Running the query
+2024-Feb-17-21:33:04 : Run query 1 complete. Closing SQL connection.
+2024-Feb-17-21:33:04 : Run query 2 complete. Closing SQL connection.
+2024-Feb-17-21:33:04 : Run query 3 complete. Closing SQL connection.
+2024-Feb-17-21:33:04 : Process Complete. Connection Closed.

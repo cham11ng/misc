@@ -1,4 +1,4 @@
-"""Module: Code for ETL operations on Country-GDP data"""
+"""Module: Code for ETL operations on Bank data"""
 
 import os
 import sqlite3
@@ -56,10 +56,10 @@ def convert_currency_to_numeric(currency):
 
 def transform(df):
     """
-    This function converts the GDP information from Currency
-    format to float value, transforms the information of GDP from
-    USD (Millions) to USD (Billions) rounding to 2 decimal places.
-    The function returns the transformed dataframe.
+    This function accesses the CSV file for exchange rate
+    information, and adds three columns to the data frame, each
+    containing the transformed version of Market Cap column to
+    respective currencies
     """
     currency_df = pd.read_csv("exchange_rate.csv")
     exchange_rate = currency_df.set_index("Currency").to_dict()["Value"]
@@ -73,7 +73,7 @@ def transform(df):
 
 def load_to_csv(df, csv_path):
     """
-    This function saves the final dataframe as a `CSV` file
+    This function saves the final data frame as a `CSV` file
     in the provided path. Function returns nothing.
     """
 
@@ -82,7 +82,7 @@ def load_to_csv(df, csv_path):
 
 def load_to_db(df, sql_connection, table_name):
     """
-    This function saves the final dataframe as a database table
+    This function saves the final data frame as a database table
     with the provided name. Function returns nothing.
     """
     df.to_sql(table_name, sql_connection, if_exists="replace", index=False)
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     transform_data = transform(extracted_data)
     log_progress("Data Transformation complete. Initiating loading process.")
 
-    load_to_csv(transform_data, "gdp.csv")
+    load_to_csv(transform_data, "banks.csv")
     log_progress("Data load to CSV file complete. Initiating SQL connection.")
 
     sql_connection = sqlite3.connect(DB_NAME)
