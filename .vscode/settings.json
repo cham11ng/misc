@@ -1,4 +1,7 @@
 {
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
   "pylint.args": [
     "--max-line-length=120",
     "--logging-fstring-interpolation=fstr"
