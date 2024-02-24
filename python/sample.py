@@ -19,4 +19,4 @@ def _():
 
 
 if __name__ == "__main__":
-    _()  # Calls _ function.
+    _()
