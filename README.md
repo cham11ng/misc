@@ -11,8 +11,13 @@ This `misc` repository contains miscellaneous coding tools and resources learnt 
   - [datagrip-to-markdown](tools/datagrip-to-markdown) - Datagrip plugin to export database table as markdown with additional column.
 
 - [python](python) - hands on projects
+
   - [bank-etl](python/course/data-engineering/bank/) - ETL process of World top Banks.
   - [gdp-etl](python/course/data-engineering/gdp/) - ETL process of World top Countries by GDP.
+
+- [c](c) - concepts
+
+  - [memory](c/course/memory.c) - Understanding memory concepts in C.
 
 ## Getting Started
 

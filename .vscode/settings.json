@@ -19,5 +19,8 @@
   "python.testing.pytestEnabled": true,
   "cSpell.words": [
     "timesheet"
-  ]
+  ],
+  "files.associations": {
+    "ctype.h": "c"
+  }
 }
