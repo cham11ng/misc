@@ -18,6 +18,7 @@ This `misc` repository contains miscellaneous coding tools and resources learnt 
 - [c](c) - concepts
 
   - [memory](c/course/memory.c) - Understanding memory concepts in C.
+  - [singly-linked-list](c/course/singly-linked-list.c) - Implementation of singly linked list.
 
 ## Getting Started
 
