@@ -14,7 +14,8 @@ This `misc` repository contains miscellaneous coding tools and resources learnt 
 
   - [bank-etl](python/course/data-engineering/bank/) - ETL process of World top Banks.
   - [gdp-etl](python/course/data-engineering/gdp/) - ETL process of World top Countries by GDP.
-  - [fibonacci](python/course/dsa/recursion/fibonacci.py) - Fibonacci Series.
+  - [fibonacci](python/course/dsa/recursion/fibonacci.py) - Fibonacci Series using multiple method.
+  - [greatest-common-divisor](python/course/dsa/recursion/gcd.py) - Greatest common divisor
 
 - [c](c) - concepts
 
@@ -22,7 +23,7 @@ This `misc` repository contains miscellaneous coding tools and resources learnt 
   - [singly-linked-list](c/course/singly_linked_list.c) - Implementation of singly linked list.
 
 - [c++](c++) - concepts
-  - [max_pairwise_product](cpp/max_pairwise_product) - Solving max pairwise problem.
+  - [max_pairwise_product](cpp/course/max_pairwise_product) - Solving max pairwise problem.
 
 ## Getting Started
 
