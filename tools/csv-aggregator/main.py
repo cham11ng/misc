@@ -103,7 +103,7 @@ for row in merged_data:
     print(",".join(row.values()))
 
 # Export the merged data into a csv file
-output_file = os.path.join(FILE_PATH, "merged.csv")
+output_file = os.path.join(FILE_PATH, "left_merge.csv")
 with open(output_file, "w", encoding="utf-8", newline="") as csv_output:
     writer = csv.DictWriter(csv_output, fieldnames=merged_data[0].keys())
     writer.writeheader()
