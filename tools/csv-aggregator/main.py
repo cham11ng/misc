@@ -25,6 +25,7 @@ C,ONLINE,2024-1-27,Surprise,ONLINE,2024-1-27
 D,OFFLINE,2023-1-10,Shocked,ONLINE,2024-1-5
 E,OFFLINE,2023-01-09,Sad,NA,NA
 """
+
 import csv
 import os
 
@@ -41,7 +42,9 @@ def merge_csv_files(file1, file2):
     Merge two csv files based on the column name MATCHING_COLUMN on both files
     and create as new csv formatted variable and print it as output.
     """
-    with open(file1, "r", encoding="utf-8") as csv_file1, open(file2, "r", encoding="utf-8") as csv_file2:
+    with open(file1, "r", encoding="utf-8") as csv_file1, open(
+        file2, "r", encoding="utf-8"
+    ) as csv_file2:
         reader1 = csv.DictReader(csv_file1)
         reader2 = csv.DictReader(csv_file2)
         fieldnames = reader1.fieldnames
@@ -59,12 +62,12 @@ def merge_csv_files(file1, file2):
         )
 
         for row1 in reader1:
-            endpoint1 = row1[MATCHING_COLUMN]
+            matching_row1 = row1[MATCHING_COLUMN].lower()
             merged_row = row1
             found_match = False
             for row2 in reader2:
-                endpoint2 = row2[MATCHING_COLUMN]
-                if endpoint1 == endpoint2:
+                matching_row2 = row2[MATCHING_COLUMN].lower()
+                if matching_row1 == matching_row2:
                     merged_row.update(
                         {
                             f"{fieldname} {FILE2_IDENTIFIER}": value
@@ -77,7 +80,9 @@ def merge_csv_files(file1, file2):
 
             if not found_match:
                 merged_row2 = {
-                    f"{fieldname} {FILE2_IDENTIFIER}": "NA" for fieldname in fieldnames2 if fieldname in COLUMN_LIST
+                    f"{fieldname} {FILE2_IDENTIFIER}": "NA"
+                    for fieldname in fieldnames2
+                    if fieldname in COLUMN_LIST
                 }
                 merged_row.update(merged_row2)
 
@@ -96,3 +101,12 @@ merged_data = merge_csv_files(csv1_path, csv2_path)
 # Print the merged data in csv format
 for row in merged_data:
     print(",".join(row.values()))
+
+# Export the merged data into a csv file
+output_file = os.path.join(FILE_PATH, "merged.csv")
+with open(output_file, "w", encoding="utf-8", newline="") as csv_output:
+    writer = csv.DictWriter(csv_output, fieldnames=merged_data[0].keys())
+    writer.writeheader()
+    writer.writerows(merged_data)
+
+print(f"Merged data exported to {output_file}")

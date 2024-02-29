@@ -1,6 +1,7 @@
-Endpoint,Status,Last Online,Issue,Status 2,Last Date Online
+Endpoint,Status,Last Online,Issue,Status 2,Last Date Online 2
+Endpoint,Status,Last Online,Issue,Status 2,Last Date Online 2
 A,ONLINE,2024-1-27,Cry,ONLINE,2024-1-27
-B,OFFLINE,2023-1-20,Unhappy,OFFLINE,2023-1-20
+b,OFFLINE,2023-1-20,Unhappy,OFFLINE,2023-1-20
 C,ONLINE,2024-1-27,Surprise,ONLINE,2024-1-27
 D,OFFLINE,2023-1-10,Shocked,ONLINE,2024-1-5
 E,OFFLINE,2023-01-09,Sad,NA,NA
