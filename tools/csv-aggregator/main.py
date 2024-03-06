@@ -31,7 +31,7 @@ import os
 
 FILE2_IDENTIFIER = "2"
 MATCHING_COLUMN = "Endpoint"
-COLUMN_LIST = ["Status", "Last Date Online"]
+COLUMN_LIST = ["Endpoint", "Status", "Last Date Online"]
 FILE_PATH = os.path.abspath(os.path.dirname(__file__))
 
 merged_data = []
@@ -67,7 +67,12 @@ def merge_csv_files(file1, file2):
             found_match = False
             for row2 in reader2:
                 matching_row2 = row2[MATCHING_COLUMN].lower()
-                if matching_row1 == matching_row2:
+
+                # skipping header.
+                if matching_row2 == MATCHING_COLUMN.lower():
+                    continue
+
+                if matching_row1 in matching_row2:
                     merged_row.update(
                         {
                             f"{fieldname} {FILE2_IDENTIFIER}": value
@@ -106,7 +111,6 @@ for row in merged_data:
 output_file = os.path.join(FILE_PATH, "left_merge.csv")
 with open(output_file, "w", encoding="utf-8", newline="") as csv_output:
     writer = csv.DictWriter(csv_output, fieldnames=merged_data[0].keys())
-    writer.writeheader()
     writer.writerows(merged_data)
 
 print(f"Merged data exported to {output_file}")
