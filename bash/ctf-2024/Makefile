@@ -1,10 +1,14 @@
-# Compile flags
+# Compile scripts
 compile:
 	@shc -f first-flag.sh -o first-flag
 	@shc -f second-flag.sh -o second-flag
 
-# Clean the generated files
+# Clean the compiled files
 clean:
 	@rm -rf *.sh.x.c
 	@rm -rf first-flag
 	@rm -rf second-flag
+
+# Compress to zip
+compress:
+	zip flag.zip first-flag second-flag
