@@ -3,6 +3,7 @@
 
 # Unignore all with extensions
 !*.*
+!Makefile
 
 # Ignore compiled files
 *.sh.x.c
