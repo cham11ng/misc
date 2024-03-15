@@ -9,7 +9,7 @@ LOGIN_PASS=trios
 
 # Check if $USER is not root
 if [ "$USER" != "root" ]; then
-    echo "Please run as `root`."
+    echo "Please run as 'root' user."
     exit 1
 fi
 
