@@ -3,7 +3,7 @@
 void main()
 {
     int i;
-    float marks[6], total=0, average;
+    float marks[7], total=0, average;
     char name[20];
     //clrscr();
     printf("Enter Name ");
