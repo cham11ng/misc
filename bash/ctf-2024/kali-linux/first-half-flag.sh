@@ -3,9 +3,9 @@ FLAG_PREFIX=testCTF
 FLAG_FTP=FTPNotSecure
 ROOT_PASS=CTF2024
 FLAW_USER=john
-FLAW_PASS=password12345
+FLAW_PASS=password
 LOGIN_USER=ctf-2024
-LOGIN_PASS=trios
+LOGIN_PASS=kali
 
 # Check if $USER is not root
 if [ "$USER" != "root" ]; then
@@ -22,17 +22,6 @@ if grep -q "${LOGIN_USER}" /etc/passwd; then
     echo "${FLAG_PREFIX}{$USER-to-"
     exit 0
 fi
-
-# --- Setting up Default Kali Linux ---
-
-# Remove read, write, execute permission for group and others
-# for all files in /home directory
-# This is to prevent other users from reading, writing, or executing
-sudo chmod go-rwx /home/* 
-
-# Change password silently to ${ROOT_PASS}
-echo "root:${ROOT_PASS}" | chpasswd
-echo "kali:${ROOT_PASS}" | chpasswd
 
 # ---- Setting up user "FLAW_USER" ----
 
@@ -78,7 +67,6 @@ chown nobody:nogroup /var/ftp/*
 
 # --- Setting up services ---
 
-echo
 echo "Setting up services..."
 
 # Enabling services and supress output
@@ -100,7 +88,6 @@ ufw allow 21/tcp &> /dev/null
 
 # --- Setting up LOGIN_USER user ---
 
-echo
 echo "Setting up login user: '${LOGIN_USER}'..."
 
 # Add user LOGIN_USER
@@ -108,9 +95,24 @@ echo "Setting up login user: '${LOGIN_USER}'..."
 useradd -m ${LOGIN_USER}
 usermod -s /bin/bash ${LOGIN_USER}
 echo "${LOGIN_USER}:${LOGIN_PASS}" | chpasswd
+echo "------------------------------------------------------"
+echo "      Password for user '${LOGIN_USER}' is: '${LOGIN_PASS}'"
+echo "------------------------------------------------------"
+
+
+# --- Setting up Default Kali Linux ---
 
 echo
-echo "              Password for user '${LOGIN_USER}' is: '${LOGIN_PASS}'"
+echo "Setting up default accounts and permissions..."
+
+# Remove read, write, execute permission for group and others
+# for all files in /home directory
+# This is to prevent other users from reading, writing, or executing
+sudo chmod go-rwx /home/* 
+
+# Change password silently to ${ROOT_PASS}
+echo "root:${ROOT_PASS}" | chpasswd
+echo "kali:${ROOT_PASS}" | chpasswd
 
 # --- Print flag ---
 
