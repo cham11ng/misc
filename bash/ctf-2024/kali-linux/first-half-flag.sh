@@ -13,16 +13,6 @@ if [ "$USER" != "root" ]; then
     exit 1
 fi
 
-# Check if LOGIN_USER user exists in password file exit
-if grep -q "${LOGIN_USER}" /etc/passwd; then
-    # Print first flag with $USER
-    echo "First part of flag is:"
-    echo
-
-    echo "${FLAG_PREFIX}{$USER-to-"
-    exit 0
-fi
-
 # ---- Setting up user "FLAW_USER" ----
 
 echo "Setting up user..."
@@ -90,6 +80,14 @@ ufw allow 21/tcp &> /dev/null
 # --- Setting up LOGIN_USER user ---
 
 echo "Setting up login user: '${LOGIN_USER}'..."
+
+# Delete user FLAW_USER with home directory if exists
+# Check if LOGIN_USER user exists in password file exit
+if grep -q "${LOGIN_USER}" /etc/passwd; then
+    # Delete user LOGIN_USER
+    userdel ${LOGIN_USER}
+    rm -rf /home/${LOGIN_USER}
+fi
 
 # Add user LOGIN_USER
 # Set default shell for LOGIN_USER to bash
