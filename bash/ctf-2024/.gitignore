@@ -4,6 +4,8 @@
 # Unignore all with extensions
 !*.*
 !Makefile
+!kali-linux
 
 # Ignore compiled files
 *.sh.x.c
+
