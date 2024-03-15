@@ -8,20 +8,6 @@ if [ "$USER" != "$LOGIN_USER" ]; then
     exit 0
 fi
 
-# --- Setting up services ---
-
-echo "Hold on..."
-
-# Enabling services and supress output
-systemctl enable ssh &> /dev/null
-systemctl enable vsftpd &> /dev/null
-systemctl enable apache2 &> /dev/null
-
-# Start services
-systemctl start ssh
-systemctl start vsftpd
-systemctl start apache2
-
 # Print second flag.
 echo "Congratulations! Here is your second flag:"
 echo

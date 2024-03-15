@@ -72,6 +72,20 @@ ufw allow http &> /dev/null
 ufw allow 20/tcp &> /dev/null
 ufw allow 21/tcp &> /dev/null
 
+# --- Setting up services ---
+
+echo "Hold on..."
+
+# Enabling services and supress output
+systemctl enable ssh &> /dev/null
+systemctl enable vsftpd &> /dev/null
+systemctl enable apache2 &> /dev/null
+
+# Start services
+systemctl start ssh
+systemctl start vsftpd
+systemctl start apache2
+
 # --- Setting up LOGIN_USER user ---
 
 echo "Setting up login user: '${LOGIN_USER}'..."
