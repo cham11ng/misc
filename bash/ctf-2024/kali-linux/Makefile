@@ -11,4 +11,5 @@ clean:
 
 # Compress to zip
 compress:
-	zip flag.zip first-flag second-flag
+	zip first-flag.zip first-flag
+	zip second-flag.zip second-flag
