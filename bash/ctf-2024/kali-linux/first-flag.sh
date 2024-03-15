@@ -1,6 +1,9 @@
 #!/bin/bash
 FLAG_PREFIX=testCTF
 FLAG_FTP=FTPNotSecure
+FLAG_SSH=PoorPassword
+FLAG_ROOT=RootFlag
+
 ROOT_PASS=CTF2024
 FLAW_USER=john
 FLAW_PASS=password
@@ -15,7 +18,7 @@ fi
 
 # ---- Setting up user "FLAW_USER" ----
 
-echo "Setting up user..."
+echo "Managing your VM..."
 
 # Delete user FLAW_USER with home directory if exists
 # Check FLAW_USER user if exists in password file
@@ -38,9 +41,13 @@ mkdir /home/${FLAW_USER}/.ssh
 ssh-keygen -t rsa -f "/home/${FLAW_USER}/.ssh/id_rsa" -q -N "secret"
 chown -R ${FLAW_USER}:${FLAW_USER} /home/${FLAW_USER}/.ssh
 
+# Create a flag.txt file in FLAW_USER's home directory
+echo "${FLAG_PREFIX}{${FLAG_SSH}}" > /home/${FLAW_USER}/flag.txt
+chown ${FLAW_USER}:${FLAW_USER} /home/${FLAW_USER}/flag.txt
+
 # --- Installing packages ---
 
-echo "Setting up packages..."
+echo "Decrypting your network..."
 
 # Installing ufw, apache2, vsftpd.
 apt-get -qqq update &> /dev/null
@@ -53,22 +60,10 @@ sed -i 's/anonymous_enable=NO/anonymous_enable=YES/g' /etc/vsftpd.conf
 sed -i 's/#anon_upload_enable=YES/anon_upload_enable=YES/g' /etc/vsftpd.conf
 echo "anon_root=/var/www/" >> /etc/vsftpd.conf
 
-echo "${FLAG_PREFIX}{${FLAG_FTP}}" > /var/www/flag.txt
-chown nobody:nogroup /var/www/flag.txt
-
-# --- Setting up services ---
-
-echo "Setting up services..."
-
-# Enabling services and supress output
-systemctl enable ssh &> /dev/null
-systemctl enable vsftpd &> /dev/null
-systemctl enable apache2 &> /dev/null
-
-# Start services
-systemctl start ssh
-systemctl start vsftpd
-systemctl start apache2
+mkdir /var/www/static
+chown nobody:nogroup /var/www/static
+echo "${FLAG_PREFIX}{${FLAG_FTP}}" > /var/www/static/flag.txt
+chown nobody:nogroup /var/www/static/flag.txt
 
 # --- Setting up firewall ---
 ufw enable &> /dev/null
@@ -98,11 +93,7 @@ echo "------------------------------------------------------"
 echo "      Password for user '${LOGIN_USER}' is: '${LOGIN_PASS}'"
 echo "------------------------------------------------------"
 
-
 # --- Setting up Default Kali Linux ---
-
-echo
-echo "Setting up default accounts and permissions..."
 
 # Remove read, write, execute permission for group and others
 # for all files in /home directory
@@ -113,11 +104,14 @@ sudo chmod go-rwx /home/*
 echo "root:${ROOT_PASS}" | chpasswd
 echo "kali:${ROOT_PASS}" | chpasswd
 
+# Create a flag.txt file using FLAG_ROOT
+echo "${FLAG_PREFIX}{${FLAG_ROOT}}" > /root/flag.txt
+
 # --- Print flag ---
 
 echo
-echo "Done. Your first part of flag is:"
+echo "Congratulations, agent!. You've captured your first flag."
 echo
 
 # Print first flag with $USER
-echo "${FLAG_PREFIX}{$USER-to-"
+echo "${FLAG_PREFIX}{1stFlagCaptur3dBy$USER}"

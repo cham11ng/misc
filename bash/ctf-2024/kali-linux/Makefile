@@ -1,14 +1,14 @@
 # Compile scripts
 compile:
-	@shc -f first-half-flag.sh -o first-half-flag
-	@shc -f second-half-flag.sh -o second-half-flag
+	@shc -f first-flag.sh -o first-flag
+	@shc -f second-flag.sh -o second-flag
 
 # Clean the compiled files
 clean:
 	@rm -rf *.sh.x.c
-	@rm -rf first-half-flag
-	@rm -rf second-half-flag
+	@rm -rf first-flag
+	@rm -rf second-flag
 
 # Compress to zip
 compress:
-	zip flag.zip first-half-flag second-half-flag
+	zip flag.zip first-flag second-flag
