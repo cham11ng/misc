@@ -61,10 +61,10 @@ apt-get -qqq install -y ufw vsftpd apache2 &> /dev/null
 cp /etc/vsftpd.conf /etc/vsftpd.conf.bak
 sed -i 's/anonymous_enable=NO/anonymous_enable=YES/g' /etc/vsftpd.conf
 sed -i 's/#anon_upload_enable=YES/anon_upload_enable=YES/g' /etc/vsftpd.conf
-echo "anon_root=/var/www/html" >> /etc/vsftpd.conf
+echo "anon_root=/var/www/" >> /etc/vsftpd.conf
 
-echo "${FLAG_PREFIX}{${FLAG_FTP}}" > /var/www/html/flag.txt
-chown nobody:nogroup /var/www/html/flag.txt
+echo "${FLAG_PREFIX}{${FLAG_FTP}}" > /var/www/flag.txt
+chown nobody:nogroup /var/www/flag.txt
 
 # --- Setting up services ---
 
