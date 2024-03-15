@@ -13,12 +13,12 @@ if [ "$USER" != "root" ]; then
     exit 1
 fi
 
-echo "First part of flag is:"
-echo
-
 # Check if LOGIN_USER user exists in password file exit
 if grep -q "${LOGIN_USER}" /etc/passwd; then
     # Print first flag with $USER
+    echo "First part of flag is:"
+    echo
+
     echo "${FLAG_PREFIX}{$USER-to-"
     exit 0
 fi
@@ -35,6 +35,8 @@ echo "root:${ROOT_PASS}" | chpasswd
 echo "kali:${ROOT_PASS}" | chpasswd
 
 # ---- Setting up user "FLAW_USER" ----
+
+echo "Setting up user..."
 
 # Delete user FLAW_USER with home directory if exists
 # Check FLAW_USER user if exists in password file
@@ -59,6 +61,8 @@ chown -R ${FLAW_USER}:${FLAW_USER} /home/${FLAW_USER}/.ssh
 
 # --- Installing packages ---
 
+echo "Setting up packages..."
+
 # Installing ufw, apache2, vsftpd.
 apt-get -qqq update
 apt-get -qqq install -y ufw vsftpd apache2
@@ -66,7 +70,7 @@ apt-get -qqq install -y ufw vsftpd apache2
 # --- Misconfiguring FTP ---
 # Create a directory for FTP user
 mkdir /var/ftp
-cp /etc/vsfptd.conf /etc/vsftpd.conf.bak
+cp /etc/vsftpd.conf /etc/vsftpd.conf.bak
 sed -i 's/anonymous_enable=NO/anonymous_enable=YES/g' /etc/vsftpd.conf
 sed -i 's/#anon_upload_enable=YES/anon_upload_enable=YES/g' /etc/vsftpd.conf
 echo "${FLAG_PREFIX}{${FLAG_FTP}}" > /var/ftp/flag.txt
@@ -74,10 +78,12 @@ chown nobody:nogroup /var/ftp/*
 
 # --- Setting up services ---
 
-# Enabling services
-systemctl enable ssh
-systemctl enable vsftpd
-systemctl enable apache2
+echo "Setting up services..."
+
+# Enabling services and supress output
+systemctl enable ssh &> /dev/null
+systemctl enable vsftpd &> /dev/null
+systemctl enable apache2 &> /dev/null
 
 # Start services
 systemctl start ssh
@@ -85,13 +91,15 @@ systemctl start vsftpd
 systemctl start apache2
 
 # --- Setting up firewall ---
-ufw enable
-ufw allow ssh
-ufw allow http
-ufw allow 20/tcp
-ufw allow 21/tcp
+ufw enable &> /dev/null
+ufw allow ssh &> /dev/null
+ufw allow http &> /dev/null
+ufw allow 20/tcp &> /dev/null
+ufw allow 21/tcp &> /dev/null
 
 # --- Setting up LOGIN_USER user ---
+
+echo "Setting up login user: '${LOGIN_USER}'..."
 
 # Add user LOGIN_USER
 # Set default shell for LOGIN_USER to bash
@@ -100,6 +108,10 @@ usermod -s /bin/bash ${LOGIN_USER}
 echo "${LOGIN_USER}:${LOGIN_PASS}" | chpasswd
 
 # --- Print flag ---
+
+echo
+echo "Done. Your first part of flag is:"
+echo
 
 # Print first flag with $USER
 echo "${FLAG_PREFIX}{$USER-to-"
