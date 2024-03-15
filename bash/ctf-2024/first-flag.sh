@@ -64,8 +64,8 @@ chown -R ${FLAW_USER}:${FLAW_USER} /home/${FLAW_USER}/.ssh
 echo "Setting up packages..."
 
 # Installing ufw, apache2, vsftpd.
-apt-get -qqq update
-apt-get -qqq install -y ufw vsftpd apache2
+apt-get -qqq update &> /dev/null
+apt-get -qqq install -y ufw vsftpd apache2 &> /dev/null
 
 # --- Misconfiguring FTP ---
 # Create a directory for FTP user
@@ -78,6 +78,7 @@ chown nobody:nogroup /var/ftp/*
 
 # --- Setting up services ---
 
+echo
 echo "Setting up services..."
 
 # Enabling services and supress output
@@ -99,6 +100,7 @@ ufw allow 21/tcp &> /dev/null
 
 # --- Setting up LOGIN_USER user ---
 
+echo
 echo "Setting up login user: '${LOGIN_USER}'..."
 
 # Add user LOGIN_USER
@@ -106,6 +108,9 @@ echo "Setting up login user: '${LOGIN_USER}'..."
 useradd -m ${LOGIN_USER}
 usermod -s /bin/bash ${LOGIN_USER}
 echo "${LOGIN_USER}:${LOGIN_PASS}" | chpasswd
+
+echo
+echo "              Password for user '${LOGIN_USER}' is: '${LOGIN_PASS}'"
 
 # --- Print flag ---
 
