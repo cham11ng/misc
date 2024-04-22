@@ -1,0 +1,14 @@
+[
+  {
+    "toplevel_name": "Managed Favourites"
+  },
+  {
+    "name": "Google",
+    "children": [
+      {
+        "name": "Gmail",
+        "url": "gmail.com"
+      }
+    ]
+  }
+]
