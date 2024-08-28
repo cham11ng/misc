@@ -59,8 +59,11 @@ def display_events(service):
 
     # Prints the start and name of the next 10 events
     for event in events:
-        start = event["start"].get("dateTime", event["start"].get("date"))
-        print(start, event["summary"])
+        date = event["start"].get("dateTime").split("T")[0]
+        start = event["start"].get("dateTime").split("T")[1].split("-")[0]
+        end = event["end"].get("dateTime").split("T")[1].split("-")[0]
+
+        print(date, ":", event["summary"], "(", start, "-", end, ")")
 
 
 def create_event(service, start_time, end_time):
@@ -77,29 +80,12 @@ def create_event(service, start_time, end_time):
             "timeZone": "America/New_York",
         },
     }
-    created_event = service.events().insert(calendarId="sgr.raee@gmail.com", body=event).execute()
+    created_event = service.events().insert(calendarId="primary", body=event).execute()
     print(f"Created event: {created_event['id']}")
 
 
 def parse_events():
-    """Parses the event string and returns a list of event tuples.
-    event_str =
-        Monday, June 17, 2024 11:00 PM - 7:00 AM, BK
-        Wednesday, June 19, 2024 3:00 PM - 7:30 PM, BK
-        Friday, June 21, 2024 7:00 PM - 11:00 PM, BK
-        Saturday, June 22, 2024 11:00 PM - 7:00 AM, BK
-        Sunday, June 23, 2024 6:30 PM - 11:00 PM, BK
-
-    to
-
-    events = [
-        ("Monday, June 17, 2024 11:00 PM", "Tuesday, June 18, 2024 7:00 AM"),
-        ("Wednesday, June 19, 2024 3:00 PM", "Wednesday, June 19, 2024 7:30 PM"),
-        ("Friday, June 21, 2024 7:00 PM", "Friday, June 21, 2024 11:00 PM"),
-        ("Saturday, June 22, 2024 11:00 PM", "Sunday, June 23, 2024 7:00 AM"),
-        ("Sunday, June 23, 2024 6:30 PM", "Sunday, June 23, 2024 11:00 PM"),
-    ]
-    """
+    """Parses the event string and returns a list of event tuples."""
     with open("schedule.txt", "r") as file:
         event_str = file.read()
 
@@ -108,6 +94,10 @@ def parse_events():
 
     for line in lines:
         date_time_range = line.split(", BK")[0]
+
+        if not date_time_range:
+            return []
+
         start_str, end_str = date_time_range.split(" - ")
 
         start_dt = datetime.datetime.strptime(start_str, DATETIME_FORMAT)
@@ -143,10 +133,7 @@ def main():
 
         display_events(service)
 
-        # Convert date and time strings to datetime objects
-
         events = parse_events()
-        print(events)
 
         for start_time_str, end_time_str in events:
             start_time = datetime.datetime.strptime(start_time_str, DATETIME_FORMAT).isoformat()
