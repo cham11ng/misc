@@ -7,6 +7,7 @@ This `misc` repository contains miscellaneous coding tools and resources learnt 
 - [tools](tools) - list of tools made to ease my daily tasks.
 
   - [csv-aggregator](tools/csv-aggregator) - CLI to perform merge (join operation) on two csv files.
+  - [eventer](tools/eventer/) - CLI to display and create upcoming events on Google Calender.
   - [wfh-to-timesheet](tools/wfh-to-timesheet) - CLI to transfer wfh report to timesheet.
   - [datagrip-to-markdown](tools/datagrip-to-markdown) - Datagrip plugin to export database table as markdown with additional column.
 
